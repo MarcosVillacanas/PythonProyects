@@ -30,7 +30,7 @@ numAristas = int(input('Numero Aristas: ')) #number of arcs
 nodoInicio = int(input('Nodo inicial: ')) #the node which BFS starts with
 
 G = nx.Graph()
-ListaNodos = []
+ListaNodos = [] #Nodes which formed the graph
 
 for i in range (numNodos):
 	ListaNodos.append(i)
