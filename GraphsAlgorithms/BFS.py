@@ -1,33 +1,33 @@
-import networkx as nx
-import matplotlib.pyplot as plt
+import networkx as nx #Graphs's Library
+import matplotlib.pyplot as plt #This library allows you to show the graph
 
 def BFS (grafo, nodoInicio):
 	Longitud = len(G)
-	ListaSol = []
-	Visitados = []
+	ListaSol = [] #final list with the nodes after BFS
+	Visitados = [] #boolean array  with the nodos i have visited
 	for i in range (Longitud):
 		Visitados.append(False)
-	Cola = []
+	Cola = [] #Candidate's queue
 	
-	Cola.insert(0,nodoInicio)
-	Visitados[nodoInicio] = True
-	ListaSol.append(nodoInicio +1)
+	Cola.insert(0,nodoInicio) #the first node enters the queue
+	Visitados[nodoInicio] = True #and so it is visited
+	ListaSol.append(nodoInicio) #and it is added to the final list
 
-	while Cola:
-		Elem = Cola.pop()
-		for Aux in G[Elem]:
-			if not Visitados[Aux]:
-				Cola.insert(0,Aux)
-				ListaSol.append(Aux +1)
-				Visitados[Aux] = True
+	while Cola: #until the queue is empty
+		Elem = Cola.pop() #pick up an element
+		for Aux in G[Elem]: #and for every neighboourd
+			if not Visitados[Aux]: #if it is not visited yet
+				Cola.insert(0,Aux) #add it to the queue
+				ListaSol.append(Aux) #add it to the list
+				Visitados[Aux] = True #and dont forget saving it is visited
 
 	return ListaSol			
 
 #Main
 
-numNodos = int(input('Numero nodos: '))
-numAristas = int(input('Numero Aristas: '))
-nodoInicio = int(input('Nodo inicial: ')) -1
+numNodos = int(input('Numero nodos: ')) #number of nodes
+numAristas = int(input('Numero Aristas: ')) #number of arcs
+nodoInicio = int(input('Nodo inicial: ')) #the node which BFS starts with
 
 G = nx.Graph()
 ListaNodos = []
@@ -37,7 +37,7 @@ for i in range (numNodos):
 G.add_nodes_from(ListaNodos)
 
 for j in range (numAristas):
-	G.add_edge(int(input('El nodo: ')) -1, int(input('enlaza con el nodo: ')) -1)
+	G.add_edge(int(input('El nodo: ')) , int(input('enlaza con el nodo: ')) )
 
 print(BFS(G, nodoInicio))
 nx.draw_circular(G,node_size=2000,node_color='c', with_labels=True)
